@@ -20,9 +20,13 @@
 ```bash
 git clone https://github.com/Auniik/pg-backup-on-sigterm.git
 cd pg-backup-on-sigterm
-docker compose up
+cp .env.example .env
 
-# then populate some data/schema in databse and in another terminal:
+docker compose up
+```
+
+####  Then populate some data/schema in databse and in another terminal:
+```bash
 docker-compose stop
 ```
 
