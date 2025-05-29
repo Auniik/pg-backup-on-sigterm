@@ -1,0 +1,28 @@
+name: app_db
+
+services:
+  db:
+    container_name: APP_DB
+    build:
+      context: ./postgresql
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_PORT: ${DB_PORT}
+      TZ: ${TIMEZONE}
+    ports:
+      - '${DB_EXPOSE_PORT}:${DB_PORT}'
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+      - ./db_backups:/backups
+    stop_signal: SIGTERM
+    stop_grace_period: 30s
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    name: app-network
